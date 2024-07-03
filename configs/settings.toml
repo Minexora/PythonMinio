@@ -1,0 +1,49 @@
+dynaconf_merge = true
+
+[default]
+    mode = "default"
+
+    [default.minio]
+        ACCESS_KEY = "minioadmin"
+        BUCKET_NAME = "Deneme"
+        SHARE_TIME = 12
+
+    [default.shortner]
+        URL_LENGTH = 6
+
+
+[development]
+    mode = "development"
+
+    [development.minio]
+        ACCESS_KEY = "minioadmin"
+        BUCKET_NAME = "my-bucket"
+        SHARE_TIME = 12
+
+    [development.shortner]
+        URL_LENGTH = 6
+
+
+[test]
+    mode = "test"
+
+    [test.minio]
+        ACCESS_KEY = "minioadmin"
+        BUCKET_NAME = "Deneme"
+        SHARE_TIME = 12
+
+    [test.shortner]
+        URL_LENGTH = 6
+
+
+[production]
+    mode = "production"
+
+    [production.minio]
+        ACCESS_KEY = "minioadmin"
+        BUCKET_NAME = "Deneme"
+        SHARE_TIME = 12
+
+    [production.shortner]
+        URL_LENGTH = 6
+        
