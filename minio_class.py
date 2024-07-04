@@ -2,6 +2,7 @@ from minio import Minio
 from configs.config import settings
 from io import BytesIO
 from datetime import timedelta
+from urllib.parse import urlparse, urlunparse
 
 
 class MinIOClass:
@@ -27,7 +28,7 @@ class MinIOClass:
     def connect(self):
         try:
             self.client = Minio(
-                "minio:9000",
+                "localhost:9000",
                 access_key=settings.minio.ACCESS_KEY,
                 secret_key=settings.minio.SECRET_KEY,
                 secure=False,
@@ -59,6 +60,10 @@ class MinIOClass:
             url = None
             if file_share:
                 url = self.client.presigned_get_object(bucket_name if bucket_name else self.bucket_name, object_name, expires=timedelta(hours=settings.minio.SHARE_TIME))
+                parsed_url = urlparse(url)
+                custom_netloc = "localhost:9001"
+                url = urlunparse(parsed_url._replace(netloc=custom_netloc))
+            _, _ = self.get_file_list()
             return True, url if url else res
         except Exception as e:
             print(str(e))
@@ -85,6 +90,9 @@ class MinIOClass:
             for obj in objects:
                 url = self.client.presigned_get_object(bucket_name if bucket_name else self.bucket_name, obj.object_name)
                 file_list.append(obj.object_name)
+                parsed_url = urlparse(url)
+                custom_netloc = "localhost:9001"
+                url = urlunparse(parsed_url._replace(netloc=custom_netloc))
                 self.file_detail_list.append({"name": obj.object_name, "url": url})
             return True, file_list
         except Exception as e:

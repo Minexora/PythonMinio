@@ -2,7 +2,8 @@ import string
 import random
 from configs.config import settings
 
-
+# TODO: Objede tutma dbde tut
+# TODO: shorten ayır ayrı proje olsun
 class URLShortener:
     chars = string.ascii_letters + string.digits
     url_map = {}
