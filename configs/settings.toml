@@ -5,11 +5,18 @@ dynaconf_merge = true
 
     [default.minio]
         ACCESS_KEY = "minioadmin"
-        BUCKET_NAME = "Deneme"
+        BUCKET_NAME = "my-bucket"
+        HOST = "localhost"
+        PORT = "9000"
         SHARE_TIME = 12
 
     [default.shortner]
         URL_LENGTH = 6
+
+    [default.flask]
+        HOST = "127.0.0.1"
+        PORT = 5000
+        DEBUG = true
 
 
 [development]
@@ -18,10 +25,17 @@ dynaconf_merge = true
     [development.minio]
         ACCESS_KEY = "minioadmin"
         BUCKET_NAME = "my-bucket"
+        HOST = "localhost"
+        PORT = "9000"
         SHARE_TIME = 12
 
     [development.shortner]
         URL_LENGTH = 6
+
+    [development.flask]
+        HOST = "127.0.0.1"
+        PORT = 5000
+        DEBUG = true
 
 
 [test]
@@ -29,21 +43,33 @@ dynaconf_merge = true
 
     [test.minio]
         ACCESS_KEY = "minioadmin"
-        BUCKET_NAME = "Deneme"
+        BUCKET_NAME = "my-bucket"
+        HOST = "localhost"
+        PORT = "9000"
         SHARE_TIME = 12
 
     [test.shortner]
         URL_LENGTH = 6
 
+    [test.flask]
+        HOST = "0.0.0.0"
+        PORT = 5000
+        DEBUG = false
 
 [production]
     mode = "production"
 
     [production.minio]
         ACCESS_KEY = "minioadmin"
-        BUCKET_NAME = "Deneme"
+        BUCKET_NAME = "my-bucket"
+        HOST = "minio"
+        PORT = "9000"
         SHARE_TIME = 12
 
     [production.shortner]
         URL_LENGTH = 6
         
+    [production.flask]
+        HOST = "0.0.0.0"
+        PORT = 5000
+        DEBUG = false

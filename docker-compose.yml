@@ -1,9 +1,12 @@
 version: '3.8'
 
-
 volumes:
   minio_data:
     driver: local
+
+networks:
+  my-network:
+    driver: bridge
 
 services:
   minio:
@@ -21,14 +24,21 @@ services:
       - MINIO_SECRET_KEY=${MINIO_ROOT_USER}
     env_file:
       - .env
+    networks:
+      - my-network
 
   flask-app:
     build: .
     container_name: flask-app
     restart: always
+
     ports:
-      - "5050:5050"
+      - 5050:5000
     volumes:
       - ./:/app
+    environment:
+      - ENV_FOR_DYNACONF=production
     depends_on:
       - minio
+    networks:
+      - my-network

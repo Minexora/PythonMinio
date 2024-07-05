@@ -1,19 +1,23 @@
-import logging
 from flask_cors import CORS
 from minio_class import MinIOClass
+from configs.config import settings
+from console_log import create_log_app
 from shortner_class import URLShortener
 from flask import Flask, redirect, request, jsonify
 
-app = Flask(__name__)
-app.logger.setLevel(logging.DEBUG)
-CORS(app)
+
 shortener = URLShortener()
 minio_cls = MinIOClass()
+logger = create_log_app()
+
+app = Flask(__name__)
+
+CORS(app, resources={r"/*": {"origins": "*"}})
 
 
 @app.route("/shorten", methods=["POST"])
 def shorten():
-    print("shorten")
+    logger.info("Shorten urline istek geldi.")
     original_url = request.json.get("url")
     if not original_url:
         return jsonify({"error": "URL is required"}), 400
@@ -23,6 +27,7 @@ def shorten():
 
 @app.route("/<short_url>", methods=["POST", "GET"])
 def redirect_to_original(short_url):
+    logger.info("Go shorten urline istek geldi.")
     original_url = shortener.get_original_url(short_url)
     if not original_url:
         return jsonify({"error": "URL not found"}), 404
@@ -31,6 +36,7 @@ def redirect_to_original(short_url):
 
 @app.route("/upload-file", methods=["POST"])
 def upload_file():
+    logger.info("Upload file urline istek geldi.")
     change_file = request.form.get("change_file")
     file_share = request.form.get("file_share")
     res = []
@@ -52,8 +58,9 @@ def upload_file():
 
 @app.route("/get-file-list", methods=["GET"])
 def get_file_list():
+    logger.info("Get file list urline istek geldi.")
     return jsonify({"response": minio_cls.file_detail_list}), 200
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=settings.flask.DEBUG, host=settings.flask.HOST, port=settings.flask.PORT)
