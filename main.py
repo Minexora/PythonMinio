@@ -29,6 +29,7 @@ def shorten():
 def redirect_to_original(short_url):
     logger.info("Go shorten urline istek geldi.")
     original_url = shortener.get_original_url(short_url)
+    logger.debug(f"\n Original_url: {original_url} \n")
     if not original_url:
         return jsonify({"error": "URL not found"}), 404
     return redirect(original_url)
@@ -59,8 +60,10 @@ def upload_file():
 @app.route("/get-file-list", methods=["GET"])
 def get_file_list():
     logger.info("Get file list urline istek geldi.")
-    return jsonify({"response": minio_cls.file_detail_list}), 200
-
+    is_ok, file_list = minio_cls.get_file_list()
+    if is_ok:
+        return jsonify({"response": minio_cls.file_detail_list}), 200
+    return jsonify({"error": file_list}), 400
 
 if __name__ == "__main__":
     app.run(debug=settings.flask.DEBUG, host=settings.flask.HOST, port=settings.flask.PORT)

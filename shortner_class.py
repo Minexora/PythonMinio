@@ -1,6 +1,11 @@
 import string
 import random
 from configs.config import settings
+from console_log import create_log_app
+
+
+console_log = create_log_app()
+
 
 # TODO: Objede tutma dbde tut
 # TODO: shorten ayır ayrı proje olsun
@@ -20,6 +25,7 @@ class URLShortener:
         return "".join(random.choice(self.chars) for _ in range(self.short_url_length))
 
     def get_original_url(self, short_url):
+        console_log.warning(f"\n Url Map: {self.url_map} \n")
         return self.url_map.get(short_url)
 
 

@@ -73,9 +73,9 @@ class MinIOClass:
             url = None
             if file_share:
                 url = self.client.presigned_get_object(bucket_name if bucket_name else self.bucket_name, object_name, expires=timedelta(hours=settings.minio.SHARE_TIME))
-                parsed_url = urlparse(url)
-                custom_netloc = "localhost:9001"
-                url = urlunparse(parsed_url._replace(netloc=custom_netloc))
+                # parsed_url = urlparse(url)
+                # custom_netloc = "localhost:9001"
+                # url = urlunparse(parsed_url._replace(netloc=custom_netloc))
                 console_log.success("Url oluşturuldu.")
             _, _ = self.get_file_list()
             return True, url if url else res
@@ -108,9 +108,9 @@ class MinIOClass:
                 console_log.success("Minio file listesi çekildi. Urller oluşturuluyor...")
                 url = self.client.get_presigned_url(method="GET", bucket_name=bucket_name if bucket_name else self.bucket_name, object_name=obj.object_name, expires=timedelta(hours=settings.minio.SHARE_TIME))
                 file_list.append(obj.object_name)
-                parsed_url = urlparse(url)
-                custom_netloc = "localhost:9001"
-                url = urlunparse(parsed_url._replace(netloc=custom_netloc))
+                # parsed_url = urlparse(url)
+                # custom_netloc = "localhost:9001"
+                # url = urlunparse(parsed_url._replace(netloc=custom_netloc))
                 self.file_detail_list.append({"name": obj.object_name, "url": url})
                 console_log.success("İşlem tamamlandı.")
             return True, file_list
