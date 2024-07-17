@@ -22,6 +22,7 @@ services:
     environment:
       - MINIO_ACCESS_KEY=${MINIO_ROOT_USER}
       - MINIO_SECRET_KEY=${MINIO_ROOT_USER}
+      - MINIO_SERVER_URL=http://192.168.33.83:9000
     env_file:
       - .env
     networks:

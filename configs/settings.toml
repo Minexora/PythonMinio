@@ -62,7 +62,7 @@ dynaconf_merge = true
     [production.minio]
         ACCESS_KEY = "minioadmin"
         BUCKET_NAME = "my-bucket"
-        HOST = "minio"
+        HOST = "192.168.33.83"
         PORT = "9000"
         SHARE_TIME = 12
 
