@@ -106,7 +106,7 @@ class MinIOClass:
             self.file_detail_list = []
             for obj in objects:
                 console_log.success("Minio file listesi çekildi. Urller oluşturuluyor...")
-                url = self.client.presigned_get_object(bucket_name if bucket_name else self.bucket_name, obj.object_name)
+                url = self.client.get_presigned_url(method="GET", bucket_name=bucket_name if bucket_name else self.bucket_name, object_name=obj.object_name, expires=timedelta(hours=settings.minio.SHARE_TIME))
                 file_list.append(obj.object_name)
                 parsed_url = urlparse(url)
                 custom_netloc = "localhost:9001"
