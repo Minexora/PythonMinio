@@ -18,6 +18,13 @@ dynaconf_merge = true
         PORT = 5000
         DEBUG = true
 
+    [default.mongo]
+        USER = "Minexora"
+        DATABASE = "Minio"
+        HOST = "127.0.0.1"
+        PORT = 27017    
+        TIMEOUT = 5000
+
 
 [development]
     mode = "development"
@@ -36,6 +43,13 @@ dynaconf_merge = true
         HOST = "127.0.0.1"
         PORT = 5000
         DEBUG = true
+
+    [development.mongo]
+        USER = "Minexora"
+        DATABASE = "Minio"
+        HOST = "127.0.0.1"
+        PORT = 27017    
+        TIMEOUT = 5000  
 
 
 [test]
@@ -56,6 +70,14 @@ dynaconf_merge = true
         PORT = 5000
         DEBUG = false
 
+    [test.mongo]
+        USER = "Minexora"
+        DATABASE = "Minio"
+        HOST = "127.0.0.1"
+        PORT = 27017    
+        TIMEOUT = 5000
+
+
 [production]
     mode = "production"
 
@@ -66,6 +88,7 @@ dynaconf_merge = true
         PORT = "9000"
         SHARE_TIME = 12
 
+
     [production.shortner]
         URL_LENGTH = 6
         
@@ -73,3 +96,10 @@ dynaconf_merge = true
         HOST = "0.0.0.0"
         PORT = 5000
         DEBUG = false
+
+    [production.mongo]
+        USER = "Minexora"
+        DATABASE = "Minio"
+        HOST = "mongo"
+        PORT = 27017     
+        TIMEOUT = 5000 

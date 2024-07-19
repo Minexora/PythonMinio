@@ -4,6 +4,7 @@ blinker==1.8.2
 certifi==2024.6.2
 cffi==1.16.0
 click==8.1.7
+dnspython==2.6.1
 dynaconf==3.2.5
 Flask==3.0.3
 Flask-Cors==4.0.1
@@ -15,6 +16,7 @@ minio==7.2.7
 packaging==24.1
 pycparser==2.22
 pycryptodome==3.20.0
+pymongo==4.8.0
 typing_extensions==4.12.2
 urllib3==2.2.2
 Werkzeug==3.0.3

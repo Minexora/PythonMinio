@@ -1,5 +1,6 @@
 from flask_cors import CORS
 from minio_class import MinIOClass
+
 from configs.config import settings
 from console_log import create_log_app
 from shortner_class import URLShortener
@@ -9,6 +10,7 @@ from flask import Flask, redirect, request, jsonify
 shortener = URLShortener()
 minio_cls = MinIOClass()
 logger = create_log_app()
+
 
 app = Flask(__name__)
 
@@ -64,6 +66,7 @@ def get_file_list():
     if is_ok:
         return jsonify({"response": minio_cls.file_detail_list}), 200
     return jsonify({"error": file_list}), 400
+
 
 if __name__ == "__main__":
     app.run(debug=settings.flask.DEBUG, host=settings.flask.HOST, port=settings.flask.PORT)
