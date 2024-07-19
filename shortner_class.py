@@ -1,5 +1,6 @@
 import string
 import random
+from datetime import datetime
 from configs.config import settings
 from mongodb import MongoDBProgress
 from console_log import create_log_app
@@ -21,7 +22,7 @@ class URLShortener:
         while short_url in self.url_map:
             short_url = self._generate_short_url()
         self.url_map[short_url] = original_url
-        mongo_cls.insert_data_to_collection(database_name=settings.mongo.DATABASE, collection_name="short_urls", data={"short_url": short_url, "original_url": original_url})
+        mongo_cls.insert_data_to_collection(database_name=settings.mongo.DATABASE, collection_name="short_urls", data={"short_url": short_url, "original_url": original_url, "datetime": datetime.now()})
         return short_url
 
     def _generate_short_url(self):
